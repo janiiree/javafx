@@ -24,18 +24,15 @@ public class Liburuak extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         stage = primaryStage;
         pantailaKargatu();
 
         stage.setTitle("OpenLibrary APIa aztertzen");
         stage.setScene(new Scene(liburuUI, 450, 275));
         stage.show();
-
     }
 
     private void pantailaKargatu() throws IOException {
-
         FXMLLoader loaderLiburuHaut = new FXMLLoader(getClass().getResource("/Liburuak.fxml"));
         liburuUI = (Parent) loaderLiburuHaut.load();
         liburuKud = loaderLiburuHaut.getController();
@@ -45,26 +42,20 @@ public class Liburuak extends Application {
         xehetasunakUI = (Parent) loaderXehet.load();
         xehetasunakKud = loaderXehet.getController();
         xehetasunakKud.setMainApp(this);
-
     }
 
     public void libHautatuErakutsi() {
-
         stage.setScene(new Scene(liburuUI, 450, 275));
         stage.show();
-
     }
 
     public void xehetasunakErakutsi() throws IOException {
-
         Book book = (Book)liburuKud.comboLiburuak.getValue();
         book = sarea.readFromURL(book.isbn);
         xehetasunakKud.infoErakutsi(book);
         stage.setScene(new Scene(xehetasunakUI, 450, 275));
         stage.show();
-
     }
 
     public static void main(String[] args) { launch(args); }
-
 }

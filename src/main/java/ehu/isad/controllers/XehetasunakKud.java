@@ -42,7 +42,6 @@ public class XehetasunakKud implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     public void infoErakutsi(Book book) throws IOException {
@@ -50,7 +49,6 @@ public class XehetasunakKud implements Initializable {
         lblOrriKop.setText(book.getDetails().getNumber_of_pages());
         lblArgtletxea.setText(book.getDetails().getPublishers()[0]);
 //      img.setImage(createImage(book.getThumbnail_url().replace("S","M")));
-
     }
 
 /*    private Image createImage(String url) throws IOException {

@@ -20,12 +20,15 @@ import java.util.ResourceBundle;
 public class LiburuKud implements Initializable {
 
     private Liburuak mainApp;
-
     private Sarea sarea = new Sarea();
 
     @FXML
     public ComboBox comboLiburuak;
+
+    @FXML
     private Label label;
+
+    @FXML
     private Button btnIkusi;
 
     public void setMainApp(Liburuak main) {
@@ -34,14 +37,11 @@ public class LiburuKud implements Initializable {
 
    @FXML
     public void onClick(ActionEvent actionEvent) throws IOException {
-
         mainApp.xehetasunakErakutsi();
-
    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         ObservableList<Book> books = FXCollections.observableArrayList();
         books.addAll(
                 new Book("9781491920497", "Blockchain: Blueprint for a New Economy"),
@@ -50,6 +50,7 @@ public class LiburuKud implements Initializable {
                 new Book("1491978236", "Natural Language Processing with PyTorch"),
                 new Book("9781491906187", "Data Algorithms")
         );
+
         comboLiburuak.setItems(books);
         comboLiburuak.getSelectionModel().selectFirst();
         comboLiburuak.setEditable(false);
@@ -61,7 +62,6 @@ public class LiburuKud implements Initializable {
                 this.label.setText( liburua.getDetails().getTitle() + "\n" +
                         liburua.getDetails().getNumber_of_pages() + "\n" +
                         liburua.getDetails().getPublishers()[0] );
-
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -79,6 +79,5 @@ public class LiburuKud implements Initializable {
                 return null;
             }
         });
-
     }
 }
