@@ -30,8 +30,11 @@ application {
 
 
 // ext.moduleName = 'gradlejavafxhelloworld'
-mainClassName = "$moduleName/ehu.isad.Main"
+mainClassName = "$moduleName/ehu.isad.Liburuak"
 
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
 
 javafx {
     version = "12"
