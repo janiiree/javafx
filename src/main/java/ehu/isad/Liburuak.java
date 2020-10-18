@@ -20,6 +20,7 @@ public class Liburuak extends Application {
 
     private LiburuKud liburuKud;
     private XehetasunakKud xehetasunakKud;
+
     private Sarea sarea;
 
     @Override

@@ -79,5 +79,7 @@ public class LiburuKud implements Initializable {
                 return null;
             }
         });
+
     }
+
 }

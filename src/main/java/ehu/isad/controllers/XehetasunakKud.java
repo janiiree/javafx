@@ -60,4 +60,5 @@ public class XehetasunakKud implements Initializable {
         ;
     }
  */
+
 }

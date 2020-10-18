@@ -1,6 +1,5 @@
 package ehu.isad;
 
-
 public class Book {
     String isbn;
     String title;
