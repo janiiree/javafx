@@ -21,7 +21,7 @@ public class Liburuak extends Application {
     private LiburuKud liburuKud;
     private XehetasunakKud xehetasunakKud;
 
-    private Sarea sarea;
+    private Sarea sarea = new Sarea();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -50,10 +50,10 @@ public class Liburuak extends Application {
         stage.show();
     }
 
-    public void xehetasunakErakutsi() throws IOException {
-        Book book = (Book)liburuKud.comboLiburuak.getValue();
-        book = sarea.readFromURL(book.isbn);
-        xehetasunakKud.infoErakutsi(book);
+    public void xehetasunakErakutsi(String izenb, String argit, String orrKop) {
+        xehetasunakKud.setLabelIzenb(izenb);
+        xehetasunakKud.setLabelArgitaletxe(argit);
+        xehetasunakKud.setLabelOrriKop(orrKop);
         stage.setScene(new Scene(xehetasunakUI, 450, 275));
         stage.show();
     }

@@ -5,9 +5,13 @@ import ehu.isad.Liburuak;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import javax.swing.text.html.ImageView;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,12 +48,11 @@ public class XehetasunakKud implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public void infoErakutsi(Book book) throws IOException {
-        lblIzenburua.setText(book.getDetails().getTitle());
-        lblOrriKop.setText(book.getDetails().getNumber_of_pages());
-        lblArgtletxea.setText(book.getDetails().getPublishers()[0]);
-//      img.setImage(createImage(book.getThumbnail_url().replace("S","M")));
-    }
+    public void setLabelIzenb(String izenb) { lblIzenburua.setText(izenb); }
+
+    public void setLabelArgitaletxe(String argit) { lblArgtletxea.setText(argit); }
+
+    public void setLabelOrriKop(String orrKop) { lblOrriKop.setText(orrKop); }
 
 /*    private Image createImage(String url) throws IOException {
         URLConnection conn = new URL(url).openConnection();

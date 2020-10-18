@@ -37,7 +37,9 @@ public class LiburuKud implements Initializable {
 
    @FXML
     public void onClick(ActionEvent actionEvent) throws IOException {
-        mainApp.xehetasunakErakutsi();
+        Book book = (Book)comboLiburuak.getValue();
+        Book liburua = this.sarea.readFromURL(book.getIsbn());
+        mainApp.xehetasunakErakutsi(liburua.getDetails().getTitle(), liburua.getDetails().getPublishers()[0], liburua.getDetails().getNumber_of_pages());
    }
 
     @Override
@@ -55,7 +57,7 @@ public class LiburuKud implements Initializable {
         comboLiburuak.getSelectionModel().selectFirst();
         comboLiburuak.setEditable(false);
 
-        comboLiburuak.setOnAction( e -> {
+/*        comboLiburuak.setOnAction( e -> {
             Book book = (Book)comboLiburuak.getValue();
             try {
                 Book liburua = sarea.readFromURL(book.getIsbn());
@@ -66,7 +68,7 @@ public class LiburuKud implements Initializable {
                 ioException.printStackTrace();
             }
         });
-
+*/
         comboLiburuak.setConverter(new StringConverter<Book>() {
             @Override
             public String toString(Book book) {
