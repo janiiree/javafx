@@ -22,4 +22,6 @@ public class Details {
     public String[] getPublishers() { return this.publishers; }
 
     public String getNumber_of_pages() { return this.number_of_pages.toString(); }
+
+    public void setTitle(String izenb) { this.title = izenb; }
 }

@@ -35,4 +35,7 @@ public class Book {
     public Details getDetails() { return this.details; }
 
     public String getThumbnail_url() { return this.thumbnail_url; }
+
+    public void setDetails(Details details) { this.details = details;
+    }
 }

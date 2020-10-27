@@ -1,12 +1,13 @@
 package ehu.isad;
 
-import ehu.isad.controllers.LiburuKud;
-import ehu.isad.controllers.XehetasunakKud;
+import ehu.isad.controllers.ui.LiburuKud;
+import ehu.isad.controllers.ui.XehetasunakKud;
 import ehu.isad.utils.Sarea;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,10 +19,15 @@ public class Liburuak extends Application {
 
     private Stage stage;
 
+    private Scene libScn;
+    private Scene xeheScn;
+
     private LiburuKud liburuKud;
     private XehetasunakKud xehetasunakKud;
 
     private Sarea sarea = new Sarea();
+
+    private ImageView img;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -29,8 +35,9 @@ public class Liburuak extends Application {
         pantailaKargatu();
 
         stage.setTitle("OpenLibrary APIa aztertzen");
-        stage.setScene(new Scene(liburuUI, 450, 275));
-        stage.show();
+        libScn = new Scene(liburuUI, 750, 500);
+        xeheScn = new Scene(xehetasunakUI, 750, 500);
+        libHautatuErakutsi();
     }
 
     private void pantailaKargatu() throws IOException {
@@ -46,15 +53,16 @@ public class Liburuak extends Application {
     }
 
     public void libHautatuErakutsi() {
-        stage.setScene(new Scene(liburuUI, 450, 275));
+        stage.setScene(libScn);
         stage.show();
     }
 
-    public void xehetasunakErakutsi(String izenb, String argit, String orrKop) {
+    public void xehetasunakErakutsi(String izenb, String argit, String orrKop, String thumbURL) throws IOException {
         xehetasunakKud.setLabelIzenb(izenb);
         xehetasunakKud.setLabelArgitaletxe(argit);
         xehetasunakKud.setLabelOrriKop(orrKop);
-        stage.setScene(new Scene(xehetasunakUI, 450, 275));
+        img.setImage(xehetasunakKud.createImage(thumbURL.replace("S","M")));
+        stage.setScene(xeheScn);
         stage.show();
     }
 

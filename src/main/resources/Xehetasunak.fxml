@@ -2,25 +2,25 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.XehetasunakKud">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controllers.ui.XehetasunakKud">
    <children>
       <Label layoutX="72.0" layoutY="51.0" text="Liburuaren Xehetasunak:">
          <font>
             <Font size="27.0" />
          </font>
       </Label>
-
-
-      
-      <Label layoutX="101.0" layoutY="108.0" text="Izenburua:" />
-      <Label layoutX="86.0" layoutY="142.0" text="Argitaletxea:" />
+      <Label layoutX="101.0" layoutY="105.0" prefWidth="95.0" text="Izenburua:" />
+      <Label alignment="CENTER_RIGHT" layoutX="68.0" layoutY="140.0" prefHeight="16.0" prefWidth="102.0" text="Argitaletxea:" />
       <Label layoutX="116.0" layoutY="175.0" text="OrriKop:" />
-      <Button fx:id="btnAtzera" layoutX="270.0" layoutY="316.0" mnemonicParsing="false" onAction="#onClick" text="Atzera" />
-      <Label fx:id="lblIzenburua" layoutX="184.0" layoutY="108.0" />
-      <Label fx:id="lblArgtletxea" layoutX="184.0" layoutY="142.0" />
+      <Label fx:id="lblIzenburua" layoutX="184.0" layoutY="105.0" />
+      <Label fx:id="lblArgtletxea" layoutX="184.0" layoutY="140.0" />
       <Label fx:id="lblOrriKop" layoutX="184.0" layoutY="175.0" />
+      <Label fx:id="lblIrudia" layoutX="130.0" layoutY="210.0" prefHeight="16.0" prefWidth="46.0" text="Irudia:" />
+      <ImageView fx:id="irudia" fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnAtzera" layoutX="270.0" layoutY="316.0" mnemonicParsing="false" onAction="#onClick" text="Atzera" />
    </children>
 </AnchorPane>

@@ -24,7 +24,7 @@ java {
 
 application {
     mainModule = 'javafx' // name defined in module-info.java
-    mainClass = 'ehu.isad.Main'
+    mainClass = 'ehu.isad.Liburuak'
 }
 
 
@@ -43,6 +43,7 @@ javafx {
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
+    compile group: 'mysql', name:'mysql-connector-java', version:'8.0.11'
 }
 
 repositories {
