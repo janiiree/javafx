@@ -3,6 +3,7 @@ package ehu.isad.controllers.db;
 import ehu.isad.Book;
 import ehu.isad.Details;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -66,14 +67,18 @@ public class LibKud {
             while(rs.next()) {
                 String izenb = rs.getString("izenburua");
                 String argit = rs.getString("argitaletxea");
-                String orrKop = rs.getString("orriKop");
+                int orrKop = rs.getInt("orriKop");
                 String irud = rs.getString("irudia");
 
                 Book book = new Book(isbn, izenb);
                 Details details = new Details();
-                details.setTitle(izenb)
+                details.setTitle(izenb);
+                details.setNumber_of_pages(orrKop);
+                book.setThumbnail_url(irud);
                 book.setDetails(details);
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return book;
     }

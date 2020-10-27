@@ -38,4 +38,6 @@ public class Book {
 
     public void setDetails(Details details) { this.details = details;
     }
+
+    public void setThumbnail_url(String irud) { this.thumbnail_url = irud; }
 }

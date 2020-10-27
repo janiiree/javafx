@@ -1,5 +1,6 @@
 package ehu.isad;
 
+import ehu.isad.controllers.db.LibKud;
 import ehu.isad.controllers.ui.LiburuKud;
 import ehu.isad.controllers.ui.XehetasunakKud;
 import ehu.isad.utils.Sarea;
@@ -11,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Liburuak extends Application {
 
@@ -58,12 +60,17 @@ public class Liburuak extends Application {
     }
 
     public void xehetasunakErakutsi(String izenb, String argit, String orrKop, String thumbURL) throws IOException {
-        xehetasunakKud.setLabelIzenb(izenb);
-        xehetasunakKud.setLabelArgitaletxe(argit);
-        xehetasunakKud.setLabelOrriKop(orrKop);
-        img.setImage(xehetasunakKud.createImage(thumbURL.replace("S","M")));
+        libAztertu();
         stage.setScene(xeheScn);
         stage.show();
+    }
+
+    private void libAztertu() throws SQLException {
+        Book book = (Book) liburuKud.comboLiburuak.getValue();
+        if(LibKud.getInstance().liburuaDago(book.getIsbn())) {
+
+
+        }
     }
 
     public static void main(String[] args) { launch(args); }

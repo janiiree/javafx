@@ -24,4 +24,6 @@ public class Details {
     public String getNumber_of_pages() { return this.number_of_pages.toString(); }
 
     public void setTitle(String izenb) { this.title = izenb; }
+
+    public void setNumber_of_pages(int orrKop) { this.number_of_pages = orrKop; }
 }
