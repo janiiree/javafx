@@ -2,8 +2,17 @@ package ehu.isad.controllers.db;
 
 import ehu.isad.Book;
 import ehu.isad.Details;
+import ehu.isad.utils.Utils;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +27,7 @@ public class LibKud {
     }
 
     public List<Book> lortuLiburuak() {
-        String query = "select ISBN, izenburua";
+        String query = "select ISBN, izenburua from liburuak";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 
@@ -40,26 +49,17 @@ public class LibKud {
         String query = "select argitaletxea from liburuak where isbn='" + "'";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
-
-        try {
-            while (rs.next()) {
-                String argit = rs.getString("argitaletxea");
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
         return rs.next();
     }
 
-    private void libBerriaGorde(String isbn, String izenb, String argit, String orrKop, String irud) {
-        String query = "insert into liburuak(ISBN, izenburua, argitaletxea, orriKop, irudia) values(" + isbn + "," + izenb + "," + argit + "," + orrKop + "," + irud + ");";
+    public void libBerriaGorde(Book book) {
+        String query = "insert into liburuak(ISBN, izenburua, argitaletxea, orriKop, irudia) values(" + book.getIsbn() + "," + book.getTitle() + "," + book.getDetails().getPublishers()[0] + "," + book.getDetails().getNumber_of_pages() + "," + book.getThumbnail_url() + ");";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         dbKudeatzaile.execSQL(query);
     }
 
-    public Book dbkoLiburuaErab(String isbn) {    //COMPROBAR TIPOS --> BOOK???
-        String query = "select ISBN, izenburua, argitaletxea, orriKop, irudia from liburuak where ISBN=" + isbn + ";";
+    public Book dbkoLiburuaErab(Book book) {
+        String query = "select ISBN, izenburua, argitaletxea, orriKop, irudia from liburuak where ISBN=" + book.getIsbn() + ";";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         ResultSet rs = dbKudeatzaile.execSQL(query);
 
@@ -70,7 +70,6 @@ public class LibKud {
                 int orrKop = rs.getInt("orriKop");
                 String irud = rs.getString("irudia");
 
-                Book book = new Book(isbn, izenb);
                 Details details = new Details();
                 details.setTitle(izenb);
                 details.setNumber_of_pages(orrKop);
@@ -81,5 +80,39 @@ public class LibKud {
             throwables.printStackTrace();
         }
         return book;
+    }
+
+    public String saveImage(String irudia, String isbn) throws IOException {
+        Image img = createImage(irudia);
+        File outputFile = new File(Utils.lortuEzarpenak().getProperty("imgPath") + isbn + ".jpg");
+        BufferedImage bImage = SwingFXUtils.fromFXImage(img,null);
+        try {
+            ImageIO.write(bImage,"jpg", outputFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return outputFile.getAbsolutePath();
+    }
+
+
+    public static Image createImage(String url) throws IOException {
+        URLConnection conn = new URL(url).openConnection();
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+        try (InputStream stream = conn.getInputStream()) {
+            return new Image(stream);
+        }
+    }
+
+    public Image getImage(String path) {
+        BufferedImage bufferedImage = null;
+        Image img;
+        try {
+            File pathFile = new File(path);
+            bufferedImage = ImageIO.read(pathFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        img = SwingFXUtils.toFXImage(bufferedImage,null);
+        return img;
     }
 }

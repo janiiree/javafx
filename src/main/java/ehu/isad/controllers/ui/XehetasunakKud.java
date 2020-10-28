@@ -54,12 +54,5 @@ public class XehetasunakKud implements Initializable {
 
     public void setLabelOrriKop(String orrKop) { lblOrriKop.setText(orrKop); }
 
-    public static Image createImage(String url) throws IOException {
-        URLConnection conn = new URL(url).openConnection();
-        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
-        try (InputStream stream = conn.getInputStream()) {
-            return new Image(stream);
-        }
-    }
 
 }

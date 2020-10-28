@@ -59,18 +59,27 @@ public class Liburuak extends Application {
         stage.show();
     }
 
-    public void xehetasunakErakutsi(String izenb, String argit, String orrKop, String thumbURL) throws IOException {
+    public void xehetasunakErakutsi(String izenb, String argit, String orrKop, String thumbURL) throws IOException, SQLException {
         libAztertu();
         stage.setScene(xeheScn);
         stage.show();
     }
 
-    private void libAztertu() throws SQLException {
-        Book book = (Book) liburuKud.comboLiburuak.getValue();
+    private void libAztertu() throws SQLException, IOException {
+        Book book = (Book)liburuKud.comboLiburuak.getValue();
+        Book liburua;
         if(LibKud.getInstance().liburuaDago(book.getIsbn())) {
-
-
+            liburua = LibKud.getInstance().dbkoLiburuaErab(book);
+        } else {
+            liburua = sarea.readFromURL(book.getIsbn());
+            String path = LibKud.getInstance().saveImage(liburua.getThumbnail_url().replace("S","M"),book.getIsbn());
+            liburua.setThumbnail_url(path);
+            LibKud.getInstance().libBerriaGorde(liburua);
         }
+        xehetasunakKud.setLabelIzenb(liburua.getTitle());
+        xehetasunakKud.setLabelArgitaletxe(liburua.getDetails().getPublishers()[0]);
+        xehetasunakKud.setLabelOrriKop(liburua.getDetails().getNumber_of_pages());
+        img.setImage(LibKud.createImage(liburua.getThumbnail_url().replace("S","M")));
     }
 
     public static void main(String[] args) { launch(args); }

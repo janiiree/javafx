@@ -4,7 +4,8 @@ open module javafx {
   requires javafx.controls;
   requires com.google.gson;
   requires java.desktop;
+    requires javafx.swing;
 
 
-  exports ehu.isad;
+    exports ehu.isad;
 }
